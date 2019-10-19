@@ -1,12 +1,22 @@
 import React from 'react';
+import { Provider } from 'react-redux'
+
 import Posts from './Components/Posts'
 import PostForm from './Components/PostForm'
+
+import store from './Components/Store'
+
+
 function App() {
+
   return (
-    <div className="App">
-      <PostForm />
-      <Posts />
+    <Provider store={store}>
+      <div className="App">
+        <PostForm />
+        <Posts />
     </div>
+    </Provider>
+    
   );
 }
 

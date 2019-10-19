@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createPost } from '../Actions/postActions'
 
 class PostForm extends Component{
     constructor(props){
         super(props);
         this.state = {
-            title : "" ,
-            body : ""
+            title : '' ,
+            body : ''
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -21,15 +24,7 @@ class PostForm extends Component{
             title: this.state.title,
             body: this.state.body 
         }
-        console.log(Post);
-        fetch("https://jsonplaceholder.typicode.com/posts", {
-                method: 'POST',
-                headers:{
-                    'content-type': 'application/json'
-                },
-                data: JSON.stringify(Post)
-            }).then(res => res.json())
-            .then(data => console.log(data));
+            this.props.createPost(Post);
         }
     render(){
         
@@ -39,11 +34,11 @@ class PostForm extends Component{
                     <form onSubmit={this.onSubmit}>
                         <div>
                             <label> Title:  </label><br />
-                            <input type="text" name="title" onChange={this.onChange}  value={this.state.title}/>
+                            <input type="text" name="title" onChange={this.onChange}  value={this.props.title}/>
                         </div>
                         <div>
                             <label> Body: </label><br />
-                            <input type="text" name="body" onChange={this.onChange}  value={this.state.body}/>
+                            <input type="text" name="body" onChange={this.onChange}  value={this.props.body}/>
                         </div>
                         <div>
                             
@@ -55,5 +50,9 @@ class PostForm extends Component{
         );
     }
 }
+PostForm.propTypes =  {
+    createPost : propTypes.func.isRequired
+}
 
-export default PostForm;
+
+export default connect(null,{ createPost })(PostForm);
