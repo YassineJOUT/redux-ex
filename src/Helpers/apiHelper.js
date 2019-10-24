@@ -1,30 +1,23 @@
+import axios from 'axios'
+
 const API_HOST = 'https://jsonplaceholder.typicode.com/posts';
 
 
 export const getPosts = (action,dispatch) => {
 
-    fetch(API_HOST)
-            .then(res =>  res.json())
-            .then(posts => dispatch({
-                    type: action,
-                    payload : posts
-                    })
-                
-            )
+    axios.get(API_HOST).then(
+        res => dispatch({
+            type: action,
+            payload : res.data
+            })
+    );
 }
 
 export const addPost = (action,dispatch,postA) => {
-    fetch(API_HOST, {
-        method: 'POST',
-        headers:{
-            'content-type': 'application/json'
-        },
-        data: JSON.stringify(postA)
-    }).then(res => res.json())
-    .then(post => dispatch({
-        type: action,
-        payload : { ...post, ...postA}
-        }        
-        )
-        )
+    axios.post(API_HOST,{postA}).then(
+        res => dispatch({
+            type: action,
+            payload : { ...res.data, ...postA}
+            })
+    );
 }
