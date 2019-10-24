@@ -32,8 +32,12 @@ Posts.propTypes =  {
     newPost : propTypes.object
 }
 
+const mapDispatchToProps = dispatch => ({
+    fetchPosts: () => fetchPosts(dispatch)
+})
+
 const mapStateToProps = state => ({
     posts : state.posts.items,
     newPost : state.posts.item
 })
-export default connect(mapStateToProps,{ fetchPosts })(Posts);
+export default connect(mapStateToProps,mapDispatchToProps)(Posts);

@@ -54,5 +54,8 @@ PostForm.propTypes =  {
     createPost : propTypes.func.isRequired
 }
 
+const mapDispatchToProps = dispatch => ({
+    createPost: post => createPost(post,dispatch)
+})
 
-export default connect(null,{ createPost })(PostForm);
+export default connect(null,mapDispatchToProps)(PostForm);
