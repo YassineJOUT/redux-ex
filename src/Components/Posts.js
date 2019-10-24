@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import { fetchPosts } from '../Actions/postActions'
+
 
 class Posts extends Component{
     componentWillMount(){
@@ -10,7 +10,6 @@ class Posts extends Component{
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.newPost){
-            console.log()
             this.props.posts.unshift(nextProps.newPost);
         }
     }
